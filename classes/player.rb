@@ -3,7 +3,7 @@ class Player
 
   def initialize(name)
     @name = name
-    @hands = []
+    @hands = {}
     @bank = 100
   end
 end

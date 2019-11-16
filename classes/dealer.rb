@@ -2,7 +2,7 @@ class Dealer
   attr_accessor :hands, :bank
 
   def initialize
-    @hands = []
+    @hands = {}
     @bank = 100
   end
 end
