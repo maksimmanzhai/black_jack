@@ -4,12 +4,16 @@ require './classes/game.rb'
 require './classes/player.rb'
 
 class Main
+  def initialize
+  end
+
   def menu
     loop do
       puts "Hello. Enter your name"
       user_name = gets.chomp
-      create_user(user_name)
-      start_game
+      player = create_user(user_name)
+      dealer = create_dealer
+      start_game(player, dealer)
     end
   end
 
@@ -17,10 +21,14 @@ class Main
     user = Player.new(name)
   end
 
-  def start_game
-    card = Cards.new
+  def create_dealer
+    dealer = Dealer.new
+  end
+
+  def start_game(player, dealer)
+    cards = Cards.new
     game = Game.new
-    game.dealing
+    game.dealing(cards.card_deck, player, dealer)
   end
 end
 
