@@ -6,7 +6,6 @@ class Player
     @name = name
     @hands = {}
     @bank = 100
-    @score = 0
   end
 
   def show_hands
@@ -14,6 +13,15 @@ class Player
   end
 
   def scoring
-    @hands.each_value { |value| @score += value }
+    @score = 0
+    @hands.each_value do |value|
+      value = 1 if value == 11 && @score > 21
+      @score += value
+    end
+    @score
+  end
+
+  def bet
+    @bank -= 10 if @bank > 0
   end
 end
