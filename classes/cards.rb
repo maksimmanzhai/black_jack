@@ -1,5 +1,5 @@
 class Cards
-  attr_reader :card_deck
+  attr_accessor :card_deck
 
   def initialize
     nominals_1 = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2']
