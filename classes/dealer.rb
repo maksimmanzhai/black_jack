@@ -1,8 +1,5 @@
-class Dealer
-  attr_accessor :hands, :bank
-
-  def initialize
-    @hands = {}
-    @bank = 100
+class Dealer < Player
+  def initialize(name='dealer')
+    super
   end
 end
