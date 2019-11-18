@@ -24,4 +24,8 @@ class Player
   def bet
     @bank -= 10 if @bank > 0
   end
+
+  def gain(arg)
+    @bank += arg
+  end
 end
