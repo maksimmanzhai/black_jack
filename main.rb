@@ -22,25 +22,18 @@ class Main
     puts "#{user.name}: #{user.score}"
     puts "#{user.show_hands}"
     choice = user_play
-    loop do
-      case choice
-      when 1
-        dealer_play(dealer)
-      when 2
-        add_card(user)
-      when 3
-        open_cards
-        
-      else
-        puts 'Good bye. Try again'
-      end
+    case choice
+    when 1
+      dealer_play(dealer)
+    when 2
+      add_card(user)
+    when 3
+      open_cards(user, dealer)
+    else
+      puts 'Good bye. Try again'
     end
-    user.scoring
-    dealer.scoring
-    puts "#{user.name}: #{user.score}"
-    puts "#{user.show_hands}"
-    puts "#{dealer.name}: #{dealer.score}"
-    puts "#{dealer.show_hands}"
+    dealer_play(dealer)
+    open_cards(user, dealer)
   end
 
   def create_user(name)
@@ -67,24 +60,40 @@ class Main
   end
 
   def dealer_play(dealer)
-    if dealer.scoring >= 17
-      user_play
-    else
-      @game.add_card(@cards, dealer) unless dealer.hands.size <= 3
-    end
+    @game.add_card(@cards, dealer) if dealer.scoring < 17 && dealer.hands.size <= 3
   end
 
   def add_card(player)
-    @game.add_card(@cards, player) unless player.hands.size <= 3
+    @game.add_card(@cards, player) if player.hands.size <= 3
   end
   
-  def open_cards
-    user.scoring
-    dealer.scoring
+  def open_cards(user, dealer)
+    counting_results(user, dealer)
+    puts "#{user.name} bank: #{user.bank}"
     puts "#{user.name}: #{user.score}"
     puts "#{user.show_hands}"
+    puts "#{dealer.name} bank: #{dealer.bank}"
     puts "#{dealer.name}: #{dealer.score}"
     puts "#{dealer.show_hands}"
+  end
+
+  def counting_results(user, dealer)
+    user.scoring
+    dealer.scoring
+    if user.score == dealer.score
+      result = 'Draw'
+      user.gain(10)
+      dealer.gain(10)
+    end
+    if (user.score > dealer.score && user.score < 21) || user.score == 21
+      result = "#{user.name} win"
+      user.gain(20)
+    end
+    if user.score < dealer.score || user.score > 21
+      result = "#{dealer.name} win"
+      dealer.gain(20)
+    end
+    puts result
   end
 end
 
