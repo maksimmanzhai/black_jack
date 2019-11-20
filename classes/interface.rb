@@ -20,7 +20,7 @@ class Interface
   end
 
   def show_score(player)
-    puts "#{player.name}: #{player.score}"
+    puts "#{player.name}: #{player.hands.scoring}"
   end
 
   def play_again
@@ -34,18 +34,17 @@ class Interface
     end
   end
 
-  def open_cards(user, dealer)
-    $main.counting_results
+  def open_cards(user, dealer, game)
+    game.counting_results(user, dealer)
     puts "#{user.name} bank: #{user.bank}"
-    puts "#{user.name}: #{user.score}"
+    show_score(user)
     puts "#{user.show_hands}"
     puts "#{dealer.name} bank: #{dealer.bank}"
-    puts "#{dealer.name}: #{dealer.score}"
+    show_score(dealer)
     puts "#{dealer.show_hands}"
   end
 
   def show_result(result)
     puts result
   end
-
 end

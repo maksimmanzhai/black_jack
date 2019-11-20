@@ -4,21 +4,12 @@ class Player
 
   def initialize(name)
     @name = name
-    @hands = {}
+    @hands
     @bank = 100
   end
 
   def show_hands
-    puts @hands
-  end
-
-  def scoring
-    @score = 0
-    @hands.each_value do |value|
-      value = 1 if value == 11 && @score > 21
-      @score += value
-    end
-    @score
+    puts @hands.hand
   end
 
   def bet
