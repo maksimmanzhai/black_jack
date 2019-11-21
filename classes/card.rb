@@ -1,11 +1,15 @@
-
-# Масти все-таки лучше сделать юникодом.
-
 class Card
   attr_accessor :card_deck
 
   NOMINALS_1 = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2']
-  SUITS = ["\u2660", "\u2665", "\u2666", "\u2663"]
+
+  SPADES = "\u2660"
+  HEARTS = "\u2665"
+  DIAMONDS = "\u2666"
+  CLUBS = "\u2663"
+
+  SUITS = [SPADES, HEARTS, DIAMONDS, CLUBS]
+
   POINTS = [11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2]
 
   def initialize
