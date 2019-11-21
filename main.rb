@@ -1,17 +1,10 @@
 require './classes/interface.rb'
 require './classes/player.rb'
-require './classes/cards.rb'
+require './classes/card.rb'
 require './classes/dealer.rb'
 require './classes/game.rb'
 require './classes/user.rb'
 require './classes/hand.rb'
-
-# 3. Класс Cards лучше переработать в Card - он будет представлять карту, 
-# отвечать навопрос "сколько очков стоит карта"
-
-# Масти все-таки лучше сделать юникодом.
-# Убери всю логику из initialize
-# nominals и suits лучше сделать константой в классе Card
 
 class Main
   def initialize
@@ -25,10 +18,8 @@ class Main
     @user.hands = Hand.new
     @dealer.hands = Hand.new
     start_game
-
     @user.hands.scoring
     @dealer.hands.scoring
-
     @user.bet
     @dealer.bet
     $interface.show_hands(@user)
@@ -58,18 +49,19 @@ class Main
   end
 
   def start_game
-    @cards = Cards.new
+    @cards = Card.new
+    @cards.deck_creation
     @game = Game.new
     2.times { @game.add_card(@cards, @user.hands) }
     2.times { @game.add_card(@cards, @dealer.hands) }
   end
 
   def dealer_play(dealer)
-    @game.add_card(@cards, dealer.hands) if @dealer.hands.scoring < 17 && @dealer.hands.hand.size <= 3
+    @game.add_card(@cards, dealer.hands) if @dealer.hands.scoring < 17 && @dealer.hands.hand.size < 3
   end
 
   def add_card(player)
-    @game.add_card(@cards, player.hands) if player.hands.hand.size <= 3
+    @game.add_card(@cards, player.hands) if player.hands.hand.size < 3
   end
 end
 
