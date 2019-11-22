@@ -1,9 +1,9 @@
-class Interface
-  def initialize
-  end
+# frozen_string_literal: true
 
+# class for create Interface
+class Interface
   def name
-    puts "Hello. Enter your name"
+    puts 'Hello. Enter your name'
     user_name = gets.chomp.capitalize
   end
 
@@ -26,11 +26,11 @@ class Interface
   end
 
   def play_again
-    puts "Will you play again? (Y/N)"
+    puts 'Will you play again? (Y/N)'
     input = gets.chomp
     case input
     when 'y'
-      $main.game_menu
+      MAIN.game_menu
     when 'n'
       puts 'Good bye. Try again'
     end

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# class for creating Hand for players
 class Hand
   attr_accessor :hand, :score
 

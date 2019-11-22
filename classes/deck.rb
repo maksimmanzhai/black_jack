@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
+# class for creating Deck
 class Deck
   attr_accessor :deck_of_cards
 
-  NOMINALS = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2']
+  NOMINALS = %w[A K Q J 10 9 8 7 6 5 4 3 2].freeze
 
-  SUITS = ["\u2660", "\u2665", "\u2666", "\u2663"]
+  SUITS = ["\u2660", "\u2665", "\u2666", "\u2663"].freeze
 
-  POINTS = [11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+  POINTS = [11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2].freeze
 
   def initialize
     @deck_of_cards = {}
@@ -19,10 +22,10 @@ class Deck
     end
   end
 
-  def add_card (number, hand)
+  def add_card(number, hand)
     number.times do
       hand.merge!(@deck_of_cards.to_a.sample(1).to_h)
-      hand.each_key { |key| (@deck_of_cards).delete(key) }
+      hand.each_key { |key| @deck_of_cards.delete(key) }
     end
   end
 end

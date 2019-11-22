@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './classes/interface.rb'
 require './classes/player.rb'
 require './classes/card.rb'
@@ -7,10 +9,8 @@ require './classes/game.rb'
 require './classes/user.rb'
 require './classes/hand.rb'
 
+# class for creating Main
 class Main
-  def initialize
-  end
-
   def game_menu
     $interface = Interface.new
     user_name = $interface.name
@@ -67,5 +67,5 @@ class Main
   end
 end
 
-$main = Main.new
-$main.game_menu
+MAIN = Main.new
+MAIN.game_menu
