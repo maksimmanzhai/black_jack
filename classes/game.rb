@@ -1,12 +1,4 @@
 class Game
-  def initialize
-  end
-
-  def add_card(cards, hands)
-    hands.hand.merge!(cards.card_deck.to_a.sample(1).to_h)
-    hands.hand.each_key { |key| (cards.card_deck).delete(key) }
-  end
-
   def counting_results(user, dealer)
     user.hands.scoring
     dealer.hands.scoring
@@ -25,5 +17,4 @@ class Game
     end
     $interface.show_result(result)
   end
-
 end
