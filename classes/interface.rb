@@ -16,7 +16,9 @@ class Interface
   end
 
   def show_hands(player)
-    puts "#{player.show_hands}"
+    player.hands.hand.each do |card, value|
+      puts "#{card.nominal}#{card.suit} - #{value}"
+    end
   end
 
   def show_score(player)
@@ -38,10 +40,10 @@ class Interface
     game.counting_results(user, dealer)
     puts "#{user.name} bank: #{user.bank}"
     show_score(user)
-    puts "#{user.show_hands}"
+    show_hands(user)
     puts "#{dealer.name} bank: #{dealer.bank}"
     show_score(dealer)
-    puts "#{dealer.show_hands}"
+    show_hands(dealer)
   end
 
   def show_result(result)
