@@ -8,10 +8,6 @@ class Player
     @bank = 100
   end
 
-  def show_hands
-    puts @hands.hand
-  end
-
   def bet
     @bank -= 10 if @bank > 0
   end
