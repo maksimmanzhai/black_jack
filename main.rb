@@ -1,6 +1,7 @@
 require './classes/interface.rb'
 require './classes/player.rb'
 require './classes/card.rb'
+require './classes/deck.rb'
 require './classes/dealer.rb'
 require './classes/game.rb'
 require './classes/user.rb'
@@ -24,6 +25,7 @@ class Main
     @dealer.bet
     $interface.show_hands(@user)
     $interface.show_score(@user)
+
     choice = $interface.user_play
     case choice
     when 1
@@ -49,19 +51,19 @@ class Main
   end
 
   def start_game
-    @cards = Card.new
-    @cards.deck_creation
+    @deck = Deck.new
+    @deck.deck_creation
     @game = Game.new
-    2.times { @game.add_card(@cards, @user.hands) }
-    2.times { @game.add_card(@cards, @dealer.hands) }
+    @deck.add_card(2, @user.hands.hand)
+    @deck.add_card(2, @dealer.hands.hand)
   end
 
   def dealer_play(dealer)
-    @game.add_card(@cards, dealer.hands) if @dealer.hands.scoring < 17 && @dealer.hands.hand.size < 3
+    @deck.add_card(1, dealer.hands.hand) if @dealer.hands.scoring < 17 && @dealer.hands.hand.size < 3
   end
 
   def add_card(player)
-    @game.add_card(@cards, player.hands) if player.hands.hand.size < 3
+    @deck.add_card(1, player.hands.hand) if player.hands.hand.size < 3
   end
 end
 
