@@ -11,10 +11,16 @@ require './classes/hand.rb'
 
 # class for creating Main
 class Main
-  def game_menu
-    $interface = Interface.new
-    user_name = $interface.name
+  def add_interface
+    @interface = Interface.new
+  end
+
+  def add_user
+    user_name = @interface.name
     @user = create_user(user_name)
+  end
+
+  def game_menu
     @dealer = create_dealer
     @user.hands = Hand.new
     @dealer.hands = Hand.new
@@ -23,23 +29,22 @@ class Main
     @dealer.hands.scoring
     @user.bet
     @dealer.bet
-    $interface.show_hands(@user)
-    $interface.show_score(@user)
-
-    choice = $interface.user_play
+    @interface.show_hands(@user)
+    @interface.show_score(@user)
+    choice = @interface.user_play
     case choice
     when 1
       dealer_play(@dealer)
     when 2
       add_card(@user)
     when 3
-      $interface.open_cards(@user, @dealer, @game)
+      @interface.open_cards(@user, @dealer, @game, @interface)
     else
       puts 'Good bye. Try again'
     end
     dealer_play(@dealer)
-    $interface.open_cards(@user, @dealer, @game)
-    $interface.play_again
+    @interface.open_cards(@user, @dealer, @game, @interface)
+    @interface.play_again(self)
   end
 
   def create_user(name)
@@ -69,5 +74,7 @@ class Main
   end
 end
 
-MAIN = Main.new
-MAIN.game_menu
+main = Main.new
+main.add_interface
+main.add_user
+main.game_menu
