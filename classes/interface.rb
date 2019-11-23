@@ -25,19 +25,19 @@ class Interface
     puts "#{player.name}: #{player.hands.scoring}"
   end
 
-  def play_again
+  def play_again(main)
     puts 'Will you play again? (Y/N)'
     input = gets.chomp
     case input
     when 'y'
-      MAIN.game_menu
+      main.game_menu
     when 'n'
       puts 'Good bye. Try again'
     end
   end
 
-  def open_cards(user, dealer, game)
-    game.counting_results(user, dealer)
+  def open_cards(user, dealer, game, interface)
+    game.counting_results(user, dealer, interface)
     puts "#{user.name} bank: #{user.bank}"
     show_score(user)
     show_hands(user)
