@@ -59,7 +59,9 @@ class Main
   end
 
   def dealer_play(dealer)
-    @deck.add_card(1, dealer.hands.hand) if @dealer.hands.scoring < 17 && @dealer.hands.hand.size < 3
+    if @dealer.hands.scoring < 17 && @dealer.hands.hand.size < 3
+      @deck.add_card(1, dealer.hands.hand)
+    end
   end
 
   def add_card(player)
