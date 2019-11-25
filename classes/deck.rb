@@ -9,8 +9,8 @@ class Deck
   end
 
   def deck_creation
-    SUITS.each do |suit|
-      NOMINALS.zip(POINTS).each do |nominal|
+    Card::SUITS.each do |suit|
+      Card::NOMINALS.zip(Card::POINTS).each do |nominal|
         @deck_of_cards[Card.new(nominal[0], suit)] = nominal[1]
       end
     end
